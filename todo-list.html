@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <style>
+      .container {
+        display: flex;
+
+        /* justify-content: center; */
+        flex-direction: column;
+        align-items: center;
+      }
+      .addItem {
+        display: flex;
+        /* flex-direction: start; */
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="addItem">
+        <input type="text" id="input" />
+        <button onclick="add()">Add</button>
+      </div>
+      <div>
+        <ul id="list"></ul>
+      </div>
+    </div>
+    <script>
+      const input = document.getElementById("input");
+     
+      function add() {
+        if (input.value != "") {
+          const item = document.createElement("li");
+          const itemName = document.createElement('p')
+          const completebtn = document.createElement('button')
+          const removebtn = document.createElement('button')
+          removebtn.innerText="Remove"
+          completebtn.innerText="Complete"
+          completebtn.setAttribute('onclick','complete(event)')
+          removebtn.setAttribute('onclick','remove(event)')
+          itemName.innerText=input.value
+          item.append(itemName)
+          item.append(completebtn)
+          item.append(removebtn)
+          console.log(item);
+          document.getElementById("list").appendChild(item);
+          input.value = "";
+        }
+      }
+      function complete(event){
+        const a = event.target;
+        // console.log(a);
+        const c = a.previousSibling;
+        c.style='text-decoration: line-through'
+      }
+      function remove(event) {
+        const a = event.target.parentNode;
+        // console.log(a);
+        a.remove();
+      }
+    </script>
+  </body>
+</html>
